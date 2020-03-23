@@ -1,12 +1,16 @@
-import { RESET, SET_TAPPED } from "../actionsTypes/types"
+import { SET_TAPPED, CORRECT_MATCH, INCORRECT_MATCH, NEW_GAME } from "../actionsTypes/types"
 
-export const tappedValueReducer = (state, action) => {
+const initialState = ''
+
+export const tappedValueReducer = (state = initialState, action) => {
   switch (action.type) {
-    case RESET:
-      return  
+    case CORRECT_MATCH:
+    case INCORRECT_MATCH:
+    case NEW_GAME:
+      return ''
     case SET_TAPPED:
       state = action.payload
-      return  state
+      return state
     default:
       return state
   }

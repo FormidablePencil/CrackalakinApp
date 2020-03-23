@@ -1,61 +1,44 @@
 import React, { createContext, useState, useReducer } from 'react'
-
 import { createStackNavigator } from '@react-navigation/stack'
-import GameMenu from '../screens/GameMenuScreen'
-import { matchingGameReducer } from '../reducers/matchingGameReducer'
-import { tappedValueReducer } from '../reducers/tappedValueReducer'
-import { scoreReducer } from '../reducers/scoreReducer'
-import { cubesLeftReducer } from '../reducers/cubesLeftReducer'
-import { prettyBoxPropertiesReducer } from '../reducers/prettyBoxPropertiesReducer'
-import MatchingGameScreen from '../screens/MatchingGameScreen'
-import GameOverScreen from '../screens/GameOverScreen'
-import GameMenuScreen from '../screens/GameMenuScreen'
-import { generateArrayOfNumbers, resetPrettyBoxProperties } from '../pureFunctions/logicMatchingGame'
+import GameScreen from '../screens/GameScreen'
+import MenuScreen from '../screens/MenuScreen'
 import { NavigationContainer } from '@react-navigation/native'
+import GameOverScreen from '../screens/GameOverScreen'
+import LoginRegisterScreen from '../screens/LoginRegisterScreen'
+import ProfileScreen from '../screens/ProfileScreen'
+import ScoreboardScreen from '../screens/ScoreboardScreen'
 
 const Stack = createStackNavigator()
 
 export const MatchingGameContext = createContext()
 
-export function ContextMatchingGameProvider() { //~ we are creating reducers for all states. I just want to clean my codebase and to learn the way to arange my code
-  const [matchingGame, dispatchMatchingGame] = useReducer(matchingGameReducer, generateArrayOfNumbers())
-  const [tappedValue, dispatchTappedValue] = useReducer(tappedValueReducer)
-  const [score, dispatchScore] = useReducer(scoreReducer, 0)
-  const [cubesLeft, dispatchCubesLeft] = useReducer(cubesLeftReducer, 0)
-  const [prettyBoxProperties, dispatchPrettyBoxProperties] = useReducer(prettyBoxPropertiesReducer, resetPrettyBoxProperties())
-  const [playGame, setPlayGame] = useState(false)
+//! we should move context and navigation into app.js
+//@ from what I understand states come with a reducer since they are both in the same file. 
+//@ the problem of keeping several states together is that evertime part of the state needs to update it rerenders the component that uses that state including the variables that comps that don't use those particluar variables. So making every variables to have it's own state is most benifitial. 
 
-  const [round, setRound] = useState(0)
-  const [seconds, setSeconds] = useState(30)
-  const [startCountdown, setStartCountdown] = useState(3)
-  const [differentScreen, setDifferentScreen] = useState(false)
-  const [toggleSettings, setToggleSettings] = useState(false)
+export function ContextMatchingGameProvider() { 
+  const [currentScreenOtherThanGame, setCurrentScreenOtherThanGame] = useState(false) //context
+  const [toggleSettingsModal, setToggleSettingsModal] = useState(false) //context
 
   return (
     <NavigationContainer>
       <MatchingGameContext.Provider value={{
-        cubesLeft, dispatchCubesLeft,
-        score, dispatchScore,
-        matchingGame, dispatchMatchingGame,
-        prettyBoxProperties, dispatchPrettyBoxProperties,
-        tappedValue, dispatchTappedValue,
-        playGame, setPlayGame,
-        seconds, setSeconds,
-        playGame, setPlayGame,
-        round, setRound,
-        startCountdown, setStartCountdown,
-        differentScreen, setDifferentScreen,
-        toggleSettings, setToggleSettings
+        currentScreenOtherThanGame, setCurrentScreenOtherThanGame,
+        toggleSettingsModal, setToggleSettingsModal
       }}>
         <Stack.Navigator screenOptions={{
           headerShown: false
         }}>
+          <Stack.Screen name='LoginRegister' component={LoginRegisterScreen} />
+          <Stack.Screen name='Menu' component={MenuScreen} />
+          <Stack.Screen name='Profile' component={ProfileScreen} /> 
+          <Stack.Screen name='Scoreboard' component={ScoreboardScreen} />
+          <Stack.Screen name='Game' component={GameScreen} />
           <Stack.Screen name='GameOver' component={GameOverScreen} />
-          <Stack.Screen name='GameMenu' component={GameMenuScreen} />
-          <Stack.Screen name='Game' component={MatchingGameScreen} />
         </Stack.Navigator>
       </MatchingGameContext.Provider>
     </NavigationContainer>
   )
 }
-{/* //* simply add GameMenu.js here and add set the navigation methods in two diffrent places. Set if playGame === true then navigate to the screen... But make it do so instantly... */ }
+
+//~ profile, scoreboard, loginRegister need to be worked on

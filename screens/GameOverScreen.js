@@ -1,39 +1,34 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { View, Text } from 'react-native'
 import { AlignContent, StandardText, SettingsView, SettingsItems, SettingsItemsText, HeaderTextHighScore, HeaderText } from '../styles/stylesMatchingGame'
+import { NEW_GAME } from '../actionsTypes/types'
+import { generateArrayOfNumbers } from '../pureFunctions/logicMatchingGame'
 import { MatchingGameContext } from '../context/ContextMatchingGame'
-import { RESET } from '../actionsTypes/types'
+import { connect } from 'react-redux'
+import { matchingGameAction } from '../actionsTypes/actions'
 
-const GameOverScreen = ({ navigation }) => {
-  const { setToggleSettings, setDifferentScreen, score, setPlayGame, setSeconds, setStartCountdown, dispatchPrettyBoxProperties, dispatchCubesLeft, dispatchTappedValue, dispatchMatchingGame } = useContext(MatchingGameContext)
+import { useSelector, useDispatch } from 'react-redux'
 
-  function handlerOnPressRestart() {
-    actionFunction()
+const GameOverScreen = ({ navigation, score, savedData}) => {
+  const counter = useSelector(state => state.counter)
+  const dispatch = useDispatch()
+  const { setCurrentScreenOtherThanGame, setToggleSettingsModal } = useContext(MatchingGameContext) 
+
+  useEffect(() => {
+    setCurrentScreenOtherThanGame(true)
+  }, [])
+
+  const handlerOnPressRestart = () => {
+    setToggleSettingsModal(false)
+    setCurrentScreenOtherThanGame(false)
+    dispatch({ type: NEW_GAME })
     navigation.navigate('Game')
-    setDifferentScreen(false)
-    
   }
-  function actionFunction() {
-    resetAction()
-    reset()
-    setPlayGame(true)
-    function resetAction() {
-      dispatchPrettyBoxProperties({ type: RESET })
-      shuffleSquare()
-      dispatchCubesLeft({ type: RESET })
-      dispatchTappedValue({ type: RESET })
-    }
 
-    function shuffleSquare() {
-      dispatchMatchingGame({ type: RESET })
-    }
-
-    function reset() { //rests
-      setToggleSettings(false)
-      setStartCountdown(3)
-      resetAction()
-    }
+  const handlerOnPressQuit = () => {
+    navigation.navigate('Menu')
   }
+
 
   return (
     <AlignContent>
@@ -41,17 +36,28 @@ const GameOverScreen = ({ navigation }) => {
       <View style={{ marginTop: 20, marginBottom: 50, flexDirection: 'row', justifyContent: 'space-around', width: '100%' }}>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <HeaderTextHighScore>Score</HeaderTextHighScore>
-          <HeaderTextHighScore>{score}</HeaderTextHighScore>
+          <HeaderTextHighScore>{savedData.score}</HeaderTextHighScore>
         </View>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <HeaderTextHighScore>High Score</HeaderTextHighScore>
-          <HeaderTextHighScore>{score}</HeaderTextHighScore>
+          <HeaderTextHighScore>{savedData.highscore}</HeaderTextHighScore>
         </View>
+        {/* <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <HeaderTextHighScore>Highest Round</HeaderTextHighScore>
+          <HeaderTextHighScore>{savedData.highestround}</HeaderTextHighScore>
+        </View> */}
       </View>
       <SettingsItems onPress={handlerOnPressRestart}><SettingsItemsText>Restart</SettingsItemsText></SettingsItems>
-      <SettingsItems onPress={() => navigation.navigate('GameMenu')}><SettingsItemsText>Quit</SettingsItemsText></SettingsItems>
+      <SettingsItems onPress={handlerOnPressQuit}><SettingsItemsText>Quit</SettingsItemsText></SettingsItems>
     </AlignContent>
   )
 }
 
-export default GameOverScreen
+
+const mapStateToProps = (state) => ({
+  score: state.score,
+  prettyBoxProperties: state.prettyBoxProperties,
+  savedData: state.savedData
+})
+
+export default connect(mapStateToProps, { matchingGameAction })(GameOverScreen)

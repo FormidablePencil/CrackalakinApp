@@ -1,62 +1,56 @@
-
 import React from 'react'
 import { View } from 'react-native'
 import { HorizontalAlign, prettyLinearGradient, styles, BoxShadowWorkAround } from '../styles/stylesMatchingGame'
 import { TextStandard } from '../styles/globalStyles'
 import { LinearGradient } from 'expo-linear-gradient';
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { matchingGameAction } from '../actionsTypes/actions'
+import { connect, useSelector, useDispatch } from 'react-redux';
 
-export const GridOfPrettyBoxes = ({ matchingGameAction, prettyBoxProperties, matchingGame }) =>
+export const GridOfPrettyBoxes = ({ pairOfNumbers }) =>
   <View>
     <PrettyBoxesRow
-      matchingGameAction={matchingGameAction}
-      prettyBoxProperties={prettyBoxProperties}
-      item={matchingGame[0]} box={0}
-      item1={matchingGame[1]} box1={1}
-      item2={matchingGame[2]} box2={2}
+      item={pairOfNumbers[0]} box={0}
+      item1={pairOfNumbers[1]} box1={1}
+      item2={pairOfNumbers[2]} box2={2}
     />
     <PrettyBoxesRow
-      matchingGameAction={matchingGameAction}
-      prettyBoxProperties={prettyBoxProperties}
-      item={matchingGame[3]} box={3}
-      item1={matchingGame[4]} box1={4}
-      item2={matchingGame[5]} box2={5}
+      item={pairOfNumbers[3]} box={3}
+      item1={pairOfNumbers[4]} box1={4}
+      item2={pairOfNumbers[5]} box2={5}
     />
     <PrettyBoxesRow
-      matchingGameAction={matchingGameAction}
-      prettyBoxProperties={prettyBoxProperties}
-      item={matchingGame[6]} box={6}
-      item1={matchingGame[7]} box1={7}
-      item2={matchingGame[8]} box2={8}
+      item={pairOfNumbers[6]} box={6}
+      item1={pairOfNumbers[7]} box1={7}
+      item2={pairOfNumbers[8]} box2={8}
     />
     <PrettyBoxesRow
-      matchingGameAction={matchingGameAction}
-      prettyBoxProperties={prettyBoxProperties}
-      item={matchingGame[9]} box={9}
-      item1={matchingGame[10]} box1={10}
-      item2={matchingGame[11]} box2={11}
+      item={pairOfNumbers[9]} box={9}
+      item1={pairOfNumbers[10]} box1={10}
+      item2={pairOfNumbers[11]} box2={11}
     />
   </View>
 
 
-export const PrettyBoxesRow = ({ item, item1, item2, box, box1, box2, prettyBoxProperties, matchingGameAction }) => {
+export const PrettyBoxesRow = ({ item, item1, item2, box, box1, box2 }) => {
   return (
-    <HorizontalAlign style={{right: -5}}>
-      <PrettyBoxes item={item} whatBox={box} prettyBoxProperties={prettyBoxProperties} matchingGameAction={matchingGameAction} />
-      <PrettyBoxes item={item1} whatBox={box1} prettyBoxProperties={prettyBoxProperties} matchingGameAction={matchingGameAction} />
-      <PrettyBoxes item={item2} whatBox={box2} prettyBoxProperties={prettyBoxProperties} matchingGameAction={matchingGameAction} />
+    <HorizontalAlign style={{ right: -5 }}>
+      <PrettyBoxes item={item} whatBox={box} />
+      <PrettyBoxes item={item1} whatBox={box1} />
+      <PrettyBoxes item={item2} whatBox={box2} />
     </HorizontalAlign >
   )
 }
 
-export function PrettyBoxes(props) { //show down here prettyBoxVisibility obj and matchingGameAction //~ the put to seperate file
-  const item = props.item
-  const whatBox = props.whatBox
-  const prettyBoxProperties = props.prettyBoxProperties
-  const matchingGameAction = props.matchingGameAction
-
+//? this doesn't seem to work
+export const PrettyBoxes = ({item, whatBox}, props) => { //show down here prettyBoxVisibility obj and matchingGameAction //~ the put to seperate file
+  const prettyBoxProperties = useSelector(state => state.prettyBoxProperties)
+  const tappedValue = useSelector(state => state.tappedValue)
+  const pairOfNumbers = useSelector(state => state.pairOfNumbers)
+  const dispatch = useDispatch()
+  
   function handleOnPress() {
-    matchingGameAction(item, whatBox)
+    dispatch(matchingGameAction({value: item, whatBox, prettyBoxProperties, tappedValue, pairOfNumbers}))
   }
 
   return (
@@ -70,7 +64,6 @@ export function PrettyBoxes(props) { //show down here prettyBoxVisibility obj an
                 style={styles.prettyBox}
                 start={[.6, .2]}
                 end={[.1, .7]} >
-
                 <TextStandard>
                   {props.children}
                 </TextStandard>
@@ -84,4 +77,10 @@ export function PrettyBoxes(props) { //show down here prettyBoxVisibility obj an
   )
 }
 
-export default GridOfPrettyBoxes
+const mapStateToProps = (state) => {
+  return {
+    prettyBoxProperties: state.prettyBoxProperties
+  }
+}
+
+export default connect(mapStateToProps, {matchingGameAction})(GridOfPrettyBoxes)

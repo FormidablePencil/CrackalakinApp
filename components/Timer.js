@@ -1,84 +1,79 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { TOGGLE } from '../actionsTypes/types';
+import { TOGGLE, COUNTING_DOWN_SECONDS, ROUND_OVER, GAME_OVER, TURN_OFF, DECREMENTING_COUNTDOWN } from '../actionsTypes/types';
 import { MatchingGameContext } from '../context/ContextMatchingGame'
 import { CountdownText } from '../styles/stylesMatchingGame'
+import { connect, useDispatch } from 'react-redux';
+import { endGameAndCommitData } from '../actionsTypes/actions';
 
-const Timer = ({navigation}) => {
-  const { playGame, setPlayGame, seconds, setSeconds, cubesLeft, round, setRound, startCountdown } = useContext(MatchingGameContext) // make it so that every correct we give a fraction of the time back
+const Timer = ({ navigation, playGame, seconds, score, round, startCountdown, savedData }) => {
+  const { currentScreenOtherThanGame, setCurrentScreenOtherThanGame, toggleSettingsModal, setToggleSettingsModal } = useContext(MatchingGameContext) //reason why there's no ability to have a seperate file for actions with useContext is cause it's not meant as a replacement for Redux and heavy use with these method of storing take a hit on the proformance
+  const dispatch = useDispatch()
 
-  function handleOnPress() {
-    setPlayGame(true)
-    console.log(playGame)
-  }
-
-  function reset() { //rests
-    setPlayGame(false)
-    setSeconds(30);
-  }
+  dispatch({type: TURN_OFF})
   
+  //COUNTDOWN LOGIC
   useEffect(() => {
-    let interval = null;
-    if (startCountdown < 0) {
-      console.log('kff')
-      if (seconds > 0) {
+    let interval = null
+    if (playGame && currentScreenOtherThanGame === false) {
+      if (startCountdown >= 0) {
         interval = setInterval(() => {
-          console.log('kqq')
-          setSeconds(seconds => seconds - 1);
+          dispatch({type: DECREMENTING_COUNTDOWN})
+        }, 1000)
+      }
+    } else if (!playGame && currentScreenOtherThanGame === false) {
+      clearInterval(interval)
+      navigation.navigate('GameOver')
+    } else {
+      clearInterval(interval)
+    }
+    return () => clearInterval(interval); //! these arrow functions I can't seem to fully grasp. Also what's with setInterval
+  }, [startCountdown])
+
+  //TIMER LOGIC
+  useEffect(() => { //~ onto implementing the soconds countdown (we really need to rename these things)
+    let interval = null;
+    if (playGame && startCountdown < 0) {
+      if (seconds > 0 && playGame === true) {
+        interval = setInterval(() => {
+          // setSeconds(seconds => seconds - 1);
+          dispatch({ type: COUNTING_DOWN_SECONDS })
         }, 1000);
       } else {
         clearInterval(interval);
-        setPlayGame(false)
+        // setPlayGame(false)
         navigation.navigate('GameOver')
       }
     }
     return () => clearInterval(interval);
   }, [startCountdown, seconds]);
 
+
   useEffect(() => {
-    if (seconds === 0) {
-      setPlayGame(false)
+    if (seconds === 0 || playGame === false) {
+      dispatch(endGameAndCommitData({score, round, savedData}))
     }
   }, [seconds])
 
 
-  useEffect(() => {
-    if (round !== 0) {
-      timerLogic()
-    }
-  }, [round])
-
-
-  function timerLogic() {
-    switch (true) {
-      case seconds >= 20:
-        setSeconds(seconds => Math.floor(seconds * 1.1))
-        break
-      case seconds < 20 && seconds >= 10:
-        setSeconds(seconds => Math.floor(seconds * 1.2))
-        break
-      case seconds < 10 >= 4:
-        setSeconds(seconds => Math.floor(seconds * 1.4))
-        break
-      case seconds < 4:
-        setSeconds(seconds => Math.floor(seconds * 2))
-        break
-      default:
-        console.log('something went wrong with the timer')
-    }
-  }
-
   return (
     <View>
       <CountdownText>{seconds}s</CountdownText>
-      {/* <TouchableOpacity onPress={handleOnPress} style={{ backgroundColor: 'aqua' }}>
-        <Text>{playGame ? 'Pause' : 'Start'}</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={reset} style={{ backgroundColor: 'aqua' }}>
-        <Text>Reset</Text>
-      </TouchableOpacity> */}
     </View>
   );
 };
 
-export default Timer;
+const mapStateToProps = (state) => {
+  return {
+    playGame: state.playGame,
+    seconds: state.seconds,
+    round: state.round,
+    startCountdown: state.startCountdown,
+    score: state.score,
+    savedData: state.savedData
+  }
+}
+
+
+export default connect(mapStateToProps)(Timer)
+// const { playGame, setPlayGame, seconds, setSeconds, cubesLef ound, setRound, startCountdown } = useContext(MatchingGameContext) // make it so that every correct we give a fraction of the time back

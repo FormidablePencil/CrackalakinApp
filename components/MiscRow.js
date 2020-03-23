@@ -5,12 +5,12 @@ import { Row, RowItem } from '../styles/stylesMatchingGame'
 import { Text, Button } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 
-export const MiscRow = ({setToggleSettings, navigation}) => {
+export const MiscRow = ({navigation, setToggleSettingsModal}) => {
 
   return (
-    <Row>{/* //@ this should be a seperate component of it's own. */}
+    <Row>
       <Timer navigation={navigation} />
-      <Ionicons name="md-settings" size={50} color="white" onPress={() => setToggleSettings(true)} style={{bottom: 10}}/>
+      <Ionicons name="md-settings" size={50} onPress={() => setToggleSettingsModal(true)} color="white" style={{bottom: 10}}/>
     </Row>
   )
 }

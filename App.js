@@ -3,8 +3,11 @@ import * as Font from 'expo-font'; //This is built in to expo and it help us to 
 import { ThemeProvider } from 'styled-components'
 import { theme } from './styles/globalStyles';
 import { ContextMatchingGameProvider } from './context/ContextMatchingGame';
+import { Provider } from 'react-redux';
+import configureStore from './store';
+const store = configureStore()
 
-export default function App() {
+export const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false)
 
   useEffect(() => {
@@ -22,11 +25,16 @@ export default function App() {
   }, [])
 
   return (
-    <ThemeProvider theme={theme}>
-      {fontLoaded ?
-        <ContextMatchingGameProvider />
-        : null
-      }
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        {fontLoaded ?
+          <ContextMatchingGameProvider />
+          : null
+        }
+      </ThemeProvider>
+    </Provider>
   );
 }
+
+
+export default App
