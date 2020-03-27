@@ -6,8 +6,7 @@ import { MiscRow } from '../components/MiscRow'
 import { MatchingGameContext } from '../context/ContextMatchingGame'
 import { NEW_GAME, GAME_OVER, ROUND_OVER } from '../actionsTypes/types'
 import { connect, useDispatch } from 'react-redux'
-import { Text } from '../styles/TextStyles'
-
+import MenuScreen from './MenuScreen'
 
 export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGame, round, startCountdown, prettyBoxProperties }) => {
   const { setCurrentScreenOtherThanGame, toggleSettingsModal, setToggleSettingsModal } = useContext(MatchingGameContext)
@@ -30,31 +29,35 @@ export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGa
     setToggleSettingsModal(false)
   }
 
-
   const handleOnPressQuit = () => {
-    navigation.navigate('Menu')
+    navigation.navigate('Game')
     dispatch({ type: NEW_GAME })
     dispatch({ type: GAME_OVER })
     setCurrentScreenOtherThanGame(true)
     setToggleSettingsModal(false)
   }
 
-
-
   return (
     <View style={{ flex: 1 }}>
+      {playGame === false &&
+        <MenuScreen navigation={navigation} />
+      }
       <AlignContent>
-        <MiscRow navigation={navigation} setToggleSettingsModal={setToggleSettingsModal} />
+        {playGame &&
+          <MiscRow navigation={navigation} setToggleSettingsModal={setToggleSettingsModal} />
+        }
         <GridOfPrettyBoxes pairOfNumbers={pairOfNumbers} />
-        <BottomRow>
-          <View>
-            <CountText>{round}</CountText>
-            <StandardText>ROUND</StandardText>
-          </View>
-          <CountText>{score}</CountText>
-        </BottomRow>
+        {playGame &&
+          <BottomRow>
+            <View>
+              <CountText>{round}</CountText>
+              <StandardText>ROUND</StandardText>
+            </View>
+            <CountText>{score}</CountText>
+          </BottomRow>
+        }
       </AlignContent>
-      {startCountdown >= 0 ?
+      {startCountdown >= 0 && playGame ?
         <StartingCountdownView><StandardText>{startCountdown}</StandardText></StartingCountdownView>
         : null
       }
@@ -70,7 +73,6 @@ export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGa
   )
 }
 
-
 const mapStateToProps = (state) => {
   return {
     pairOfNumbers: state.pairOfNumbers,
@@ -83,6 +85,5 @@ const mapStateToProps = (state) => {
     startCountdown: state.startCountdown,
   }
 }
-
 
 export default connect(mapStateToProps, null)(GameScreen)

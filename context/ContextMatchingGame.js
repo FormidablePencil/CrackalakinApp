@@ -64,14 +64,14 @@ export function ContextMatchingGameProvider() {
               },
             }}
             component={LoginRegisterScreen} />
-          <Stack.Screen name='Menu' component={MenuScreen}
+          {/* <Stack.Screen name='Menu' component={MenuScreen}
             options={{
               transitionSpec: {
                 open: config,
                 close: config,
               },
             }}
-          />
+          /> */}
           <Stack.Screen name='Scoreboard' component={ScoreboardScreen} />
           <Stack.Screen name='GameOver' component={GameOverScreen} />
         </Stack.Navigator>

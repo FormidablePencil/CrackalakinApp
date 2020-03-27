@@ -69,10 +69,8 @@ export const RandomizeBtn = styled.TouchableOpacity`
   background-color: gray; 
 `
 export const BoxShadowWorkAround = styled.View`
-  /* margin: 3px;  */
   elevation: 5;
   background-color: ${props => props.theme[props.theme.current].bg.bgColor}; 
-  background-color: pink;
   margin: 6px; /* //~ what controls the margin between the screen */
   border-radius: 15px;
 `
@@ -84,16 +82,17 @@ export const Row = styled.View`
   height: 100px;
   padding: 0px 20px 0px 20px;
   position: absolute;
-  top: -80px;
 `
 export const StartMenuView = styled.View`
   flex: 1;
-  background-color: rgb(33,	33,	33);
+  /* background-color: rgba(215,124,25,.1); */
   width: 100%;
   justify-content: space-around;
   align-items: center;
   padding-top: 60px;
   padding-bottom: 60px;
+  z-index: 40;
+  height: 100%;
 `
 export const FlexRow = styled.View`
   flex-direction: row;
@@ -107,7 +106,7 @@ export const ScoreCount = styled.View`
 export const BottomRow = styled.View`
   flex-direction: row;
   position: absolute;
-  bottom: -100px;
+  bottom: 10px;
   align-items: center;
   justify-content: space-between;
   width: 100%;

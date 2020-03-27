@@ -3,11 +3,12 @@ import { Shuffle, RandomizeBtn, StandardText, SettingsView } from '../styles/sty
 import Timer from './Timer'
 import { Row, RowItem } from '../styles/stylesMatchingGame'
 import { Ionicons } from '@expo/vector-icons';
+import { Text } from '../styles/TextStyles';
 
 export const MiscRow = ({navigation, setToggleSettingsModal}) => {
 
   return (
-    <Row>
+    <Row style={{position: 'absolute', top: 40}}>
       <Timer navigation={navigation} />
       <Ionicons name="md-settings" size={50} onPress={() => setToggleSettingsModal(true)} color="white" style={{bottom: 10}}/>
     </Row>

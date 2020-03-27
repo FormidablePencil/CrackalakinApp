@@ -10,7 +10,7 @@ const ScoreboardScreen = ({ navigation }) => {
       <Text>Scoreboard</Text>
       <Text>highlight the users score whereever it is</Text>
 
-      <Button title="Menu" onPress={() => navigation.navigate("Menu")} />
+      <Button title="Game" onPress={() => navigation.navigate("Game")} />
     </Bg>
   );
 };

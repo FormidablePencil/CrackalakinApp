@@ -68,7 +68,7 @@ const EnteringOptionsComp = ({ navigation, setLoginScreenReady }) => {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
           setLoginScreenReady(false)
-          navigation.navigate("Menu")
+          navigation.navigate("Game")
         }}>
           <TextDarkOrange>Guest</TextDarkOrange>
         </TouchableOpacity>

@@ -17,7 +17,7 @@ const ProfileScreen = ({ navigation }) => {
     headerLeft: () => (
       <TouchableOpacity
         style={{ flex: 1, justifyContent: 'center', height: '100%' }}
-        onPress={() => navigation.navigate("Menu")}>
+        onPress={() => navigation.navigate("Game")}>
         <Text style={{ backgroundColor: '#D69D1E', paddingLeft: 10, paddingRight: 10, margin: 10, borderRadius: 5 }}>Back</Text>
       </TouchableOpacity>
     ),

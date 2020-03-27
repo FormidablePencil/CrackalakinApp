@@ -54,7 +54,6 @@ export const PrettyBoxes = ({ item, whatBox }, props) => { //show down here pret
   function handleOnPress() {
     dispatch(matchingGameAction({ value: item, whatBox, prettyBoxProperties, tappedValue, pairOfNumbers }))
   }
-  // console.log(prettyLinearGradient[item]['linearGradient'])
   return (
     <View style={{ width: '33.33%', height: '100%' }}>
       {prettyBoxProperties[whatBox].visible ?

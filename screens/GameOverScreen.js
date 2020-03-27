@@ -26,7 +26,7 @@ const GameOverScreen = ({ navigation, score, savedData}) => {
   }
 
   const handlerOnPressQuit = () => {
-    navigation.navigate('Menu')
+    navigation.navigate('Game')
   }
 
 
