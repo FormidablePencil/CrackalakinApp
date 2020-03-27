@@ -37,14 +37,9 @@ export const prettyLinearGradient = {   /* //~ now to make it look nice with lin
 
 export const VerticallyAlign = styled.View`
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
 `
 export const HorizontalAlign = styled.View`
-  flex: 1;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
   width: 100%;
 `
 export const PrettyBoxes2 = styled.TouchableOpacity`
@@ -65,7 +60,6 @@ export const AlignContent = styled.View`
   justify-content: center;
   align-items: center;
 `
-
 export const RandomizeBtn = styled.TouchableOpacity`
   height: 80px;
   width: 80px;
@@ -75,11 +69,11 @@ export const RandomizeBtn = styled.TouchableOpacity`
   background-color: gray; 
 `
 export const BoxShadowWorkAround = styled.View`
-  margin: 3px; 
+  /* margin: 3px;  */
   elevation: 5;
   background-color: ${props => props.theme[props.theme.current].bg.bgColor}; 
-  width: 94.5%;
-  height: 89.5%;
+  background-color: pink;
+  margin: 6px; /* //~ what controls the margin between the screen */
   border-radius: 15px;
 `
 export const Row = styled.View`
@@ -92,17 +86,14 @@ export const Row = styled.View`
   position: absolute;
   top: -80px;
 `
-// export const RowItem = styled.View`
-//   flex: 1;
-//   align-items: center;
-//   justify-content: center;
-// `
 export const StartMenuView = styled.View`
   flex: 1;
   background-color: rgb(33,	33,	33);
   width: 100%;
   justify-content: space-around;
   align-items: center;
+  padding-top: 60px;
+  padding-bottom: 60px;
 `
 export const FlexRow = styled.View`
   flex-direction: row;
@@ -160,13 +151,24 @@ export const HeaderTextHighScore = styled(StandardText)`
 export const HeaderText = styled(StandardText)`
   font-size: 50px;
   text-align: center;
+  top: 50px;
+`
+export const HeaderText2 = styled(StandardText)`
+  margin-bottom: 40px;
+  font-size: 50px;
+  text-align: center;
 `
 export const Shuffle = styled(StandardText)`
   font-size: 25px;
 `
 
 export const prettyBox2 = styled.Text`
-  align-items: center; justify-content: center; border-radius: 15; width: 110; height: 110; margin: 3;
+  align-items: center;
+   justify-content: center;
+    border-radius: 15;
+     width: 110;
+      height: 110;
+       margin: 3;
 `
 export const CountdownText = styled(StandardText)`
   font-family: Poppins-Regular;
@@ -181,7 +183,11 @@ export const CountText = styled(StandardText)`
 
 export const styles = StyleSheet.create({
   prettyBox: {
-    alignItems: 'center', justifyContent: 'center', borderRadius: 15, width: 110, height: 110,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
+    width: 100,
+    height: 100,
   },
   littleMargin: {
     margin: 3,

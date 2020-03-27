@@ -1,27 +1,45 @@
-import React, { useState } from "react";
-import { Bg, Text, H1 } from "../styles/stylesLoginReg";
-import InputFields from "../components/InputFields";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { ImageBackground, Button } from "react-native";
+import React, { useContext, useState } from "react";
+import { ImageBackground, Button, View, LayoutAnimation } from "react-native";
 import liquid from "../assets/liquid.jpg";
+import { KeyboardAvoidingView } from "react-native";
+import EnteringOptionsComp from "../components/EnteringOptionsComp";
+import { Video } from "expo-av";
+import vid from '../assets/video.mp4'
+import { H1 } from "../styles/TextStyles";
+import { Bg } from "../styles/ContainerStyles";
+import { MatchingGameContext } from "../context/ContextMatchingGame";
+import LoadingComp from "../components/LoadingComp";
 
 const LoginRegisterScreen = ({ navigation }) => {
-  const [formInputs, setFormInputs] = useState({
-    username: "",
-    password: "", //! make it so it doesn't show...
-    email: ""
-  });
+  // const { setLoginScreenReady } = useContext(MatchingGameContext)
+  const [loginScreenReady, setLoginScreenReady] = useState(false)
+  console.log(loginScreenReady)
   return (
-    <ImageBackground source={liquid} style={{ width: "100%", height: "100%" }}>
+    <View style={{ position: 'relative', height: '100%' }}>
+      <Video
+        onReadyForDisplay={() => {
+          setLoginScreenReady(true)
+          LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+        }}
+        source={vid}
+        rate={1.0}
+        volume={0}
+        isMuted={false}
+        resizeMode="cover"
+        shouldPlay
+        isLooping
+        style={{ width: '100%', height: '100%', position: 'absolute' }}
+      />
       <Bg>
         <H1>Crackilackin</H1>
-        <InputFields formInputs={formInputs} setFormInputs={setFormInputs} />
+        <KeyboardAvoidingView style={{ width: "100%" }} behavior="position">
+          <EnteringOptionsComp navigation={navigation} setLoginScreenReady={setLoginScreenReady} />
+        </KeyboardAvoidingView>
       </Bg>
-      <Button
-        title="validation btn"
-        onPress={() => navigation.navigate("Menu")}
-      />
-    </ImageBackground>
+      {loginScreenReady === false &&
+        <LoadingComp />
+      }
+    </View>
   );
 };
 

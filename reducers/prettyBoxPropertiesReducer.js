@@ -21,7 +21,7 @@ export const prettyBoxPropertiesReducer = (state = initialState, action) => {
       return state
     case NEW_GAME:
     case ROUND_OVER:
-      state = resetPrettyBoxProperties()
+      return resetPrettyBoxProperties()
     case GAME_OVER:
       return state.map(item => item.pressable = true)
     default:

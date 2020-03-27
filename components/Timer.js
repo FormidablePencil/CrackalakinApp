@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { TOGGLE, COUNTING_DOWN_SECONDS, ROUND_OVER, GAME_OVER, TURN_OFF, DECREMENTING_COUNTDOWN } from '../actionsTypes/types';
 import { MatchingGameContext } from '../context/ContextMatchingGame'
 import { CountdownText } from '../styles/stylesMatchingGame'

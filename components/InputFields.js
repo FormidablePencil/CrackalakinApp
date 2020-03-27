@@ -1,37 +1,42 @@
 import React, { useState } from "react";
-import { Bg, Text, TextInput, Field } from "../styles/stylesLoginReg";
-import { View } from "react-native";
+import { Button, View } from "react-native";
+import { loginValidation, registerValidation } from "../fetching/playingFetch";
+import { TextDarkOrange } from "../styles/TextStyles";
+import { TextInput } from "../styles/globalStyles";
+
 
 //@ reusable component
-const InputFields = ({ formInputs, setFormInputs }) => {
+export const InputFields = ({ formInputs, setFormInputs, inputSchema, name }) => {
   const handleOnChange = (value, whatField) => {
-    setFormInputs({ ...formInputs, [whatField]: value.nativeEvent.text });
+    setFormInputs({ ...formInputs, [whatField]: value.nativeEvent.text }); //!  maybe unneccesay to keep state in parent
   };
   return (
-    <Field>
-      <Text>Username:</Text>
-      <TextInput
-        type="email"
-        name="type"
-        value={formInputs.username}
-        onChange={value => handleOnChange(value, "username")}
-      />
-      <Text>Password:</Text>
-      <TextInput
-        visible-password
-        type="password"
-        name="password"
-        value={formInputs.password}
-        onChange={value => handleOnChange(value, "password")}
-      />
-      <Text>Email:</Text>
-      <TextInput
-        type="email"
-        name="email"
-        value={formInputs.email}
-        onChange={value => handleOnChange(value, "email")}
-      />
-    </Field>
+    <View >
+      {Object.keys(inputSchema).map(whatInputField =>
+        whatInputField !== 'password' ?
+          <View key={whatInputField}>
+            <TextDarkOrange>{whatInputField}:</TextDarkOrange>
+            <TextInput
+              type="email"
+              name="type"
+              value={formInputs[whatInputField]}
+              onChange={value => handleOnChange(value, [whatInputField])}
+            />
+          </View>
+          :
+          <View key={whatInputField}>
+            <TextDarkOrange>{whatInputField}:</TextDarkOrange>
+            <TextInput
+              secureTextEntry={true}
+              secureTextEntry={true}
+              type="email"
+              name="type"
+              value={formInputs[whatInputField]}
+              onChange={value => handleOnChange(value, [whatInputField])}
+            />
+          </View>
+      )}
+    </View>
   );
 };
 

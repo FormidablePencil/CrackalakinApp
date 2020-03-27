@@ -1,22 +1,18 @@
 import React, { useContext, useEffect } from "react";
-import { View, Text, Button } from "react-native";
-import {
-  StartMenuView,
-  HeaderText,
-  StandardText,
-  FlexRow,
-  HeaderTextHighScore
-} from "../styles/stylesMatchingGame";
+import { View, Button } from "react-native";
+import { Text } from '../styles/TextStyles'
 import { MatchingGameContext } from "../context/ContextMatchingGame";
 import { NEW_GAME } from "../actionsTypes/types";
 import { generateArrayOfNumbers } from "../pureFunctions/logicMatchingGame";
 import { connect, useDispatch } from "react-redux";
 import { playingWithFetch, postingData } from "../fetching/playingFetch";
+import { MaterialIcons } from '@expo/vector-icons'
+import { HeaderText, StartMenuView } from "../styles/stylesMatchingGame";
+import { ItemInCol, JustifyCenterView } from "../styles/ContainerStyles";
+import { ContinueBtn, ActionBtn } from "../styles/BtnStyles";
 
 const GameMenuScreen = ({ navigation, pairOfNumbers, score, savedData }) => {
-  const { setToggleSettingsModal, setCurrentScreenOtherThanGame } = useContext(
-    MatchingGameContext
-  );
+  const { setCurrentScreenOtherThanGame } = useContext(MatchingGameContext);
   const dispatch = useDispatch();
 
   function handleOnPressStartGame() {
@@ -24,34 +20,36 @@ const GameMenuScreen = ({ navigation, pairOfNumbers, score, savedData }) => {
     navigation.navigate("Game");
     setCurrentScreenOtherThanGame(false);
   }
-  const logout = () => {
-    navigation.navigate("LoginRegister");
-  };
 
   return (
     <StartMenuView>
-      <StandardText></StandardText>
-
-      <HeaderTextHighScore>
-        High Score: {savedData.highscore}
-      </HeaderTextHighScore>
+      <MaterialIcons style={{ position: 'absolute', right: 0, margin: 10 }} name="settings" size={50} color='#FEBF3C' onPress={() => navigation.navigate("Profile")} />
       <HeaderText>Lets Get Crackalackin!</HeaderText>
+      {/* <HeaderTextHighScore>
+        High Score: {savedData.highscore}
+      </HeaderTextHighScore> */}
+      <ItemInCol>
+        <JustifyCenterView style={{}}>
+          <Text>High score</Text>
+          <Text>32</Text>
+        </JustifyCenterView>
+        <JustifyCenterView>
+          <Text>High round</Text>
+          <Text>3</Text>
+        </JustifyCenterView>
+      </ItemInCol>
       {savedData.score !== 0 ? (
         <StandardText>Score: {savedData.score}</StandardText>
       ) : null}
-      <Button title={"start game"} onPress={handleOnPressStartGame} />
-      <Button title={"playingFetch"} onPress={postingData} />
-      <Button title="logout" onPress={logout} />
-      <Button title="profile" onPress={() => navigation.navigate("Profile")} />
-      <Button
-        title="scoreboard"
-        onPress={() => navigation.navigate("Scoreboard")}
-      />
-
-      <StandardText></StandardText>
-      <StandardText></StandardText>
-      <StandardText></StandardText>
-    </StartMenuView>
+      <View style={{ flexDirection: 'row', justifyContent: "space-evenly", width: "100%", alignItems: 'center' }}>
+        <ActionBtn onPress={handleOnPressStartGame} >
+          <Text style={{ fontSize: 25, color: '#fff', fontFamily: 'Bungee-Regular', alignItems: 'center' }}>Start</Text>
+        </ActionBtn>
+        <ActionBtn onPress={() => navigation.navigate("Scoreboard")} >
+          <Text style={{ fontSize: 25, color: '#fff', fontFamily: 'Bungee-Regular', textAlign: 'center' }}>Leader board</Text>
+        </ActionBtn>
+      </View >
+    </StartMenuView >
   );
 };
 

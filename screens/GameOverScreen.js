@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { View, Text } from 'react-native'
-import { AlignContent, StandardText, SettingsView, SettingsItems, SettingsItemsText, HeaderTextHighScore, HeaderText } from '../styles/stylesMatchingGame'
+import { AlignContent, StandardText, SettingsView, SettingsItems, SettingsItemsText, HeaderTextHighScore, HeaderText2 } from '../styles/stylesMatchingGame'
 import { NEW_GAME } from '../actionsTypes/types'
 import { generateArrayOfNumbers } from '../pureFunctions/logicMatchingGame'
 import { MatchingGameContext } from '../context/ContextMatchingGame'
@@ -32,7 +32,7 @@ const GameOverScreen = ({ navigation, score, savedData}) => {
 
   return (
     <AlignContent>
-      <HeaderText>Game Over</HeaderText>
+      <HeaderText2>Game Over</HeaderText2>
       <View style={{ marginTop: 20, marginBottom: 50, flexDirection: 'row', justifyContent: 'space-around', width: '100%' }}>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <HeaderTextHighScore>Score</HeaderTextHighScore>

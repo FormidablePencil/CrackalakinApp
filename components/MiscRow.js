@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react'
 import { Shuffle, RandomizeBtn, StandardText, SettingsView } from '../styles/stylesMatchingGame'
 import Timer from './Timer'
 import { Row, RowItem } from '../styles/stylesMatchingGame'
-import { Text, Button } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 
 export const MiscRow = ({navigation, setToggleSettingsModal}) => {

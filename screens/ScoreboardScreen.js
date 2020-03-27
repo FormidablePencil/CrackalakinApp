@@ -1,6 +1,7 @@
 import React from "react";
-import { Text, Button } from "react-native";
-import { Bg } from "../styles/stylesLoginReg";
+import { Button } from "react-native";
+import { Bg } from "../styles/ContainerStyles";
+import { Text } from "../styles/TextStyles";
 
 const ScoreboardScreen = ({ navigation }) => {
   return (

@@ -20,13 +20,9 @@ export const theme = {
   }
 }
 
-export const AlignTotallyCenterView = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`
-export const TextStandard = styled.Text`
-  color: white;
-  font-size: 40px;
-`
-
+export const TextInput = styled.TextInput`
+  background-color: #FDE09D;
+  width: 80%;
+  align-self: center;
+  margin-bottom: 10px;
+`;

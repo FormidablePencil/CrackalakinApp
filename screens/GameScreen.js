@@ -6,8 +6,8 @@ import { MiscRow } from '../components/MiscRow'
 import { MatchingGameContext } from '../context/ContextMatchingGame'
 import { NEW_GAME, GAME_OVER, ROUND_OVER } from '../actionsTypes/types'
 import { connect, useDispatch } from 'react-redux'
+import { Text } from '../styles/TextStyles'
 
-const width = Math.round(Dimensions.get('window').width);
 
 export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGame, round, startCountdown, prettyBoxProperties }) => {
   const { setCurrentScreenOtherThanGame, toggleSettingsModal, setToggleSettingsModal } = useContext(MatchingGameContext)
@@ -44,19 +44,15 @@ export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGa
   return (
     <View style={{ flex: 1 }}>
       <AlignContent>
-        <View>
-          <MiscRow navigation={navigation} setToggleSettingsModal={setToggleSettingsModal} />
-          <VerticallyAlign style={{ height: width * 1.33 }}>
-            <GridOfPrettyBoxes pairOfNumbers={pairOfNumbers} />
-          </VerticallyAlign>
-          <BottomRow>
-            <View>
-              <CountText>{round}</CountText>
-              <StandardText>ROUND</StandardText>
-            </View>
-            <CountText>{score}</CountText>
-          </BottomRow>
-        </View>
+        <MiscRow navigation={navigation} setToggleSettingsModal={setToggleSettingsModal} />
+        <GridOfPrettyBoxes pairOfNumbers={pairOfNumbers} />
+        <BottomRow>
+          <View>
+            <CountText>{round}</CountText>
+            <StandardText>ROUND</StandardText>
+          </View>
+          <CountText>{score}</CountText>
+        </BottomRow>
       </AlignContent>
       {startCountdown >= 0 ?
         <StartingCountdownView><StandardText>{startCountdown}</StandardText></StartingCountdownView>
