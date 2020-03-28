@@ -31,15 +31,15 @@ export const matchingGameAction = ({ value, whatBox, prettyBoxProperties, tapped
             firstMatchingBox: firstMatchingBox,
             secondMatchingBox: secondMatchingBox,
          })
-         break
+         return 'correct'
       case 'incorrect':
          dispatch({ type: INCORRECT_MATCH })
          dispatch({ type: MAKE_ALL_ELEMENT_PRESSABLE })
-         break
+         return 'incorrent'
       case 'firstBoxSelected':
          dispatch({ type: FIRST_ELEMENT_SELECTED, payload: whatBox }) //change to be an array of items instaed...
          dispatch({ type: SET_TAPPED, payload: value })
-         break
+         return 'firstBoxSelected'
       case 'element already selected':
          break
    }

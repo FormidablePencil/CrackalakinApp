@@ -20,30 +20,32 @@ const GameMenuScreen = ({ navigation, pairOfNumbers, score, savedData }) => {
   const dispatch = useDispatch();
   const iconRef = useRef(50)
   const [animationState, setAnimationState] = useState(19)
-  const [animationFinished, setAnimationFinished] = useState(true)
+  const [animation, setanimation] = useState(false)
 
   const handlerOnAnimationEnd = () => {
-    if (animationFinished === false) {
+    if (animation === true) {
       dispatch({ type: NEW_GAME });
-      console.log('new gamee')
     }
   }
 
+
   function handleOnPressStart() {
-    setAnimationFinished(false)
+    setanimation(true)
 
     // navigation.navigate("Game");
     // setCurrentScreenOtherThanGame(false);
   }
   // useEffect(() => {
-  //   if (animationFinished) setAnimationFinished(!animationFinished)
-  //   else if (!animationFinished) setAnimationFinished(!animationState)
-  // }, [animationFinished])
+  //   if (animation) setanimation(!animation)
+  //   else if (!animation) setanimation(!animationState)
+  // }, [animation])
 
   return (
-    <View style={{ height: "100%", flex: 1, position: 'absolute', zIndex: 10, backgroundColor: 'rgba(0,0,0,.4)' }}>
+    <View style={{ height: "100%", flex: 1, position: 'absolute', zIndex: 20, backgroundColor: 'rgba(0,0,0,.4)' }}>
       <StartMenuViewAnimatable
-        animation={animationFinished === false ? 'flipOutX' : 'bounceIn'}
+        style={{}}
+        useNativeDriver
+        animation={animation && zoomOut}
         onAnimationEnd={handlerOnAnimationEnd}
       >
         {/* //@ here we'll have to use interpolate so you flip it back before animation finishes and giving it a smooth effect vs animatable cutting it off. LayoutAnmimation maybe was the one I expoerimennted on before and acheived this effect */}

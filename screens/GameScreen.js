@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react'
-import { View, Dimensions } from 'react-native'
+import { View, Dimensions, } from 'react-native'
 import { VerticallyAlign, AlignContent, SettingsView, SettingsItemsText, StandardText, BottomRow, CountText, SettingsItems, StartingCountdownView } from '../styles/stylesMatchingGame'
 import GridOfPrettyBoxes from '../components/GridOfPrettyBoxes'
 import { MiscRow } from '../components/MiscRow'

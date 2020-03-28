@@ -13,7 +13,6 @@ import LoadingComp from "../components/LoadingComp";
 const LoginRegisterScreen = ({ navigation }) => {
   // const { setLoginScreenReady } = useContext(MatchingGameContext)
   const [loginScreenReady, setLoginScreenReady] = useState(false)
-  console.log(loginScreenReady)
   return (
     <View style={{ position: 'relative', height: '100%' }}>
       <Video
