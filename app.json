@@ -25,6 +25,11 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "description": "",
+    "android": {
+      "package": "com.formidablepencil.crackilackin",
+      "versionCode": 1
     }
   }
 }

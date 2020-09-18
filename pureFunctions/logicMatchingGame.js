@@ -23,15 +23,16 @@ export function resetPrettyBoxProperties() {
 }
 
 export const addToTimeLogic = (seconds) => {
-  switch (true) {
-    case seconds >= 20:
-      return Math.floor(seconds * 1.1)
-    case seconds < 20 && seconds >= 10:
-      return Math.floor(seconds * 1.2)
-    case seconds < 10 >= 4:
-      return Math.floor(seconds * 1.4)
-    case seconds < 4:
-      return Math.floor(seconds * 2)
-    default:
-  }
+  return seconds
+  // switch (true) {
+    // case seconds >= 20:
+    //   return Math.floor(seconds * 1.1)
+    // case seconds < 20 && seconds >= 10:
+    //   return Math.floor(seconds * 1.2)
+    // case seconds < 10 >= 4:
+    //   return Math.floor(seconds * 1.4)
+    // case seconds < 4:
+    //   return Math.floor(seconds * 2)
+    // default:
+  // }
 }

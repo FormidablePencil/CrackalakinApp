@@ -8,7 +8,7 @@ export const secondsReducer = (state = initialState, action) => {
       case ACTION_TEST_123:
          return state
       case NEW_GAME:
-         return 300
+         return 30
       case COUNTING_DOWN_SECONDS:
          return state - 1
       case ROUND_OVER:

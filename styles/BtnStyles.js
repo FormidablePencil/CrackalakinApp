@@ -35,3 +35,14 @@ export const ActionBtn = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
 `;
+
+export const PlayBtn = styled.TouchableOpacity`
+  background: #FF6161;
+  elevation: 5;
+  border-radius: 10px;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`

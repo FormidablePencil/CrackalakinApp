@@ -43,7 +43,6 @@ const GameMenuScreen = ({ navigation, pairOfNumbers, score, savedData }) => {
   return (
     <View style={{ height: "100%", flex: 1, position: 'absolute', zIndex: 20, backgroundColor: 'rgba(0,0,0,.4)' }}>
       <StartMenuViewAnimatable
-        style={{}}
         useNativeDriver
         animation={animation && zoomOut}
         onAnimationEnd={handlerOnAnimationEnd}
@@ -65,7 +64,7 @@ const GameMenuScreen = ({ navigation, pairOfNumbers, score, savedData }) => {
 
 
 
-        <MaterialIcons style={{ position: 'absolute', right: 0, margin: 10 }} name="settings" size={50} color='#FEBF3C' onPress={() => navigation.navigate("Profile")} />
+        {/* <MaterialIcons style={{ position: 'absolute', right: 0, margin: 10 }} name="settings" size={50} color='#FEBF3C' onPress={() => navigation.navigate("Profile")} /> */}
         <View>
           <HeaderText>Lets Get</HeaderText>
           <HeaderText>Crackalackin!</HeaderText>
@@ -76,11 +75,11 @@ const GameMenuScreen = ({ navigation, pairOfNumbers, score, savedData }) => {
         <ItemInCol>
           <JustifyCenterView style={{}}>
             <Text>High score</Text>
-            <Text>32</Text>
+            <Text>{savedData.score}</Text>
           </JustifyCenterView>
           <JustifyCenterView>
             <Text>High round</Text>
-            <Text>3</Text>
+            <Text>{savedData.round}</Text>
           </JustifyCenterView>
         </ItemInCol>
         {savedData.score !== 0 ? (
@@ -90,9 +89,9 @@ const GameMenuScreen = ({ navigation, pairOfNumbers, score, savedData }) => {
           <ActionBtn onPress={handleOnPressStart} >
             <Text style={{ fontSize: 25, color: '#fff', fontFamily: 'fredoka-one-regular', alignItems: 'center', }}>START</Text>
           </ActionBtn>
-          <ActionBtn onPress={() => navigation.navigate("Scoreboard")} >
+          {/* <ActionBtn onPress={() => navigation.navigate("Scoreboard")} >
             <Text style={{ fontSize: 25, color: '#fff', fontFamily: 'fredoka-one-regular', textAlign: 'center' }}>LEADER BOARD</Text>
-          </ActionBtn>
+          </ActionBtn> */}
         </View >
       </StartMenuViewAnimatable >
     </View>

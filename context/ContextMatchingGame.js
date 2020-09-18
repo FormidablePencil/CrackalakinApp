@@ -41,6 +41,14 @@ export function ContextMatchingGameProvider() {
             backgroundColor: 'gray'
           }
         }}>
+          <Stack.Screen name='LoginRegister'
+            options={{
+              transitionSpec: {
+                open: config,
+                close: config,
+              },
+            }}
+            component={LoginRegisterScreen} />
           <Stack.Screen name='Game' component={GameScreen} />
           <Stack.Screen options={{
             headerShown: true,
@@ -56,14 +64,6 @@ export function ContextMatchingGameProvider() {
               },
             }}
             component={Animations4} /> */}
-          <Stack.Screen name='LoginRegister'
-            options={{
-              transitionSpec: {
-                open: config,
-                close: config,
-              },
-            }}
-            component={LoginRegisterScreen} />
           {/* <Stack.Screen name='Menu' component={MenuScreen}
             options={{
               transitionSpec: {

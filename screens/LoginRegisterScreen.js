@@ -7,12 +7,17 @@ import { Video } from "expo-av";
 import vid from '../assets/video.mp4'
 import { H1 } from "../styles/TextStyles";
 import { Bg } from "../styles/ContainerStyles";
+import { PlayBtn } from "../styles/BtnStyles";
 import { MatchingGameContext } from "../context/ContextMatchingGame";
 import LoadingComp from "../components/LoadingComp";
+import { authentication } from '../App'
+import styled from "styled-components";
+import { Text } from "react-native";
 
 const LoginRegisterScreen = ({ navigation }) => {
   // const { setLoginScreenReady } = useContext(MatchingGameContext)
   const [loginScreenReady, setLoginScreenReady] = useState(false)
+
   return (
     <View style={{ position: 'relative', height: '100%' }}>
       <Video
@@ -29,17 +34,45 @@ const LoginRegisterScreen = ({ navigation }) => {
         isLooping
         style={{ width: '100%', height: '100%', position: 'absolute' }}
       />
-      <Bg>
-        <H1>Crackilackin</H1>
-        <KeyboardAvoidingView style={{ width: "100%" }} behavior="position">
-          <EnteringOptionsComp navigation={navigation} setLoginScreenReady={setLoginScreenReady} />
-        </KeyboardAvoidingView>
-      </Bg>
-      {loginScreenReady === false &&
-        <LoadingComp />
+
+      {!authentication ?
+        <CenterView>
+          <H1
+            style={{ position: 'absolute', top: 110 }}
+          >What's</H1>
+          <H1
+            style={{ position: 'absolute', top: 150 }}
+          >Crackilackin</H1>
+          <PlayBtn
+            onPress={() => {
+              setLoginScreenReady(false)
+              navigation.navigate("Game")
+            }}
+          ><H1>Play</H1></PlayBtn>
+        </CenterView>
+        :
+        <>
+          <Bg>
+            <H1>Crackilackin</H1>
+            <KeyboardAvoidingView style={{ width: "100%" }} behavior="position">
+              <EnteringOptionsComp navigation={navigation} setLoginScreenReady={setLoginScreenReady} />
+            </KeyboardAvoidingView>
+          </Bg>
+          {loginScreenReady === false &&
+            <LoadingComp />
+          }
+        </>
       }
+
     </View>
   );
 };
 
 export default LoginRegisterScreen;
+
+const CenterView = styled.View`
+  height: 100%;
+  width: 100%;
+  justify-content:center;
+  align-items:center;
+`

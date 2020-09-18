@@ -38,7 +38,7 @@ export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGa
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1}}>
       {playGame === false &&
         <MenuScreen navigation={navigation} />
       }

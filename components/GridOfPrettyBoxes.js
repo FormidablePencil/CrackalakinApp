@@ -12,6 +12,7 @@ import * as Animatable from 'react-native-animatable';
 import { ROUND_OVER } from '../actionsTypes/types';
 
 const AnimatedViewAnimated = Animatable.createAnimatableComponent(View);
+const windowHeight = Dimensions.get('window').height;
 
 const width = Math.round(Dimensions.get('window').width);
 const LinearGradientAnimatable = Animatable.createAnimatableComponent(LinearGradient);
@@ -28,12 +29,13 @@ export const GridOfPrettyBoxes = ({ pairOfNumbers }) => {
   }, [round])
 
   return (
-    < VerticallyAlign style={{ height: width * 1.3333, width: '100%' }
-    }>
+    < VerticallyAlign style={{ height: width * 1.3333, width: '100%', }}
+    >
       <AnimatedViewAnimated
         style={{
           height: '100%',
-          width: '100%', zIndex: 10
+          width: '100%', zIndex: 10,
+          transform: [{ scale: windowHeight < 650 ? .7 : 1 }]
         }}>
         <PrettyBoxesRow
           item={pairOfNumbers[0]} box={0}

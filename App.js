@@ -8,6 +8,8 @@ import configureStore from './store';
 const store = configureStore()
 // import { setCustomText } from 'react-native-global-props';
 
+export const authentication = false
+
 export const App = () => {
   const [fontLoaded, setFontLoaded] = useState(false)
   // const customTextProps = { 
