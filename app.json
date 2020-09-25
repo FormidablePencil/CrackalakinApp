@@ -14,11 +14,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-<<<<<<< HEAD
-      "backgroundColor": "#FFCDA3"
-=======
       "backgroundColor": "#FFE3C2"
->>>>>>> first-release-version
     },
     "updates": {
       "fallbackToCacheTimeout": 0
