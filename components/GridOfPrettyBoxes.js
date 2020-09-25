@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { View, LayoutAnimation } from 'react-native'
-import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { matchingGameAction } from '../actionsTypes/actions'
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { BoxShadowWorkAround, HorizontalAlign, prettyLinearGradient, styles, StandardText } from '../styles/stylesMatchingGame';
 import { LinearGradient } from 'expo-linear-gradient'
-import { Text } from '../styles/TextStyles';
+// import { Text } from '../styles/TextStyles';
 import { Dimensions } from 'react-native'
 import { VerticallyAlign } from '../styles/stylesMatchingGame'
 import * as Animatable from 'react-native-animatable';
-import { ROUND_OVER } from '../actionsTypes/types';
+// import { ROUND_OVER } from '../actionsTypes/types';
 
 const AnimatedViewAnimated = Animatable.createAnimatableComponent(View);
 const windowHeight = Dimensions.get('window').height;

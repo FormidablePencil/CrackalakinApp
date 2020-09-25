@@ -14,6 +14,7 @@ import Animations4 from '../animatedComps/Animations4'
 import { Button } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Text } from '../styles/globalStyles'
+import useHandleScoreLocalStorage from '../hooks/useHandleScoreLocalStorage'
 
 const Stack = createStackNavigator()
 
@@ -28,6 +29,8 @@ export function ContextMatchingGameProvider() {
   const [toggleSettingsModal, setToggleSettingsModal] = useState(false) //context
   const [loginScreenReady, setLoginScreenReady] = useState(false)
 
+  useHandleScoreLocalStorage()
+  
   return (
     <NavigationContainer>
       <MatchingGameContext.Provider value={{

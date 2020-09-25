@@ -1,17 +1,13 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { View, Button, LayoutAnimation } from "react-native";
+import React, { useContext, useRef, useState } from "react";
+import { View } from "react-native";
 import { Text } from '../styles/TextStyles'
 import { MatchingGameContext } from "../context/ContextMatchingGame";
 import { NEW_GAME } from "../actionsTypes/types";
-import { generateArrayOfNumbers } from "../pureFunctions/logicMatchingGame";
 import { connect, useDispatch } from "react-redux";
-import { playingWithFetch, postingData } from "../fetching/playingFetch";
-import { MaterialIcons } from '@expo/vector-icons'
 import { HeaderText, StartMenuView, StandardText } from "../styles/stylesMatchingGame";
 import { ItemInCol, JustifyCenterView } from "../styles/ContainerStyles";
-import { ContinueBtn, ActionBtn } from "../styles/BtnStyles";
+import {  ActionBtn } from "../styles/BtnStyles";
 import * as Animatable from 'react-native-animatable';
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const StartMenuViewAnimatable = Animatable.createAnimatableComponent(StartMenuView);
 
