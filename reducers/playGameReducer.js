@@ -7,7 +7,7 @@ export const playGameReducer = (state = initialState, action) => {
     case GAME_OVER:
       return false
     case NEW_GAME:
-      case ROUND_OVER:
+    case ROUND_OVER:
       return true
     default:
       return state

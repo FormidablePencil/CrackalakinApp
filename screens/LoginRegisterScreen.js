@@ -1,10 +1,8 @@
 import React, { useContext, useState } from "react";
 import { ImageBackground, Button, View, LayoutAnimation } from "react-native";
-import liquid from "../assets/liquid.jpg";
 import { KeyboardAvoidingView } from "react-native";
 import EnteringOptionsComp from "../components/EnteringOptionsComp";
 import { Video } from "expo-av";
-import vid from '../assets/video.mp4'
 import { H1 } from "../styles/TextStyles";
 import { Bg } from "../styles/ContainerStyles";
 import { PlayBtn } from "../styles/BtnStyles";

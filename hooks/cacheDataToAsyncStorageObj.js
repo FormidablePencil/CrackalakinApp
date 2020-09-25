@@ -4,7 +4,6 @@ export const cacheDataToAsyncStorageObj = {
   getLocallyStoredData: async (getFrom) => {
     const localStorageString = await AsyncStorage.getItem(getFrom)
     const result = await JSON.parse(localStorageString)
-    console.log(result)
     return result
   },
 

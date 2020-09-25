@@ -1,12 +1,12 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import { Text } from '../styles/TextStyles'
 import { MatchingGameContext } from "../context/ContextMatchingGame";
 import { NEW_GAME } from "../actionsTypes/types";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { HeaderText, StartMenuView, StandardText } from "../styles/stylesMatchingGame";
 import { ItemInCol, JustifyCenterView } from "../styles/ContainerStyles";
-import {  ActionBtn } from "../styles/BtnStyles";
+import { ActionBtn } from "../styles/BtnStyles";
 import * as Animatable from 'react-native-animatable';
 
 const StartMenuViewAnimatable = Animatable.createAnimatableComponent(StartMenuView);
@@ -23,7 +23,6 @@ const GameMenuScreen = ({ navigation, pairOfNumbers, score, savedData }) => {
       dispatch({ type: NEW_GAME });
     }
   }
-
 
   function handleOnPressStart() {
     setanimation(true)
@@ -71,11 +70,11 @@ const GameMenuScreen = ({ navigation, pairOfNumbers, score, savedData }) => {
         <ItemInCol>
           <JustifyCenterView style={{}}>
             <Text>High score</Text>
-            <Text>{savedData.score}</Text>
+            <Text>{savedData.highscore}</Text>
           </JustifyCenterView>
           <JustifyCenterView>
             <Text>High round</Text>
-            <Text>{savedData.round}</Text>
+            <Text>{savedData.highestround}</Text>
           </JustifyCenterView>
         </ItemInCol>
         {savedData.score !== 0 ? (
