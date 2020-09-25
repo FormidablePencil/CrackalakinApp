@@ -7,13 +7,13 @@ import GameOverScreen from '../screens/GameOverScreen'
 import LoginRegisterScreen from '../screens/LoginRegisterScreen'
 import OptionsScreen from '../screens/OptionsScreen'
 import ScoreboardScreen from '../screens/ScoreboardScreen'
-import Animations from '../animatedComps/Animations'
-import Animations2 from '../animatedComps/Animations2'
-import Animations3 from '../animatedComps/Animations3'
-import Animations4 from '../animatedComps/Animations4'
-import { Button } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Text } from '../styles/globalStyles'
+// import Animations from '../animatedComps/Animations'
+// import Animations2 from '../animatedComps/Animations2'
+// import Animations3 from '../animatedComps/Animations3'
+// import Animations4 from '../animatedComps/Animations4'
+// import { Button } from 'react-native'
+// import { TouchableOpacity } from 'react-native-gesture-handler'
+// import { Text } from '../styles/globalStyles'
 import useHandleScoreLocalStorage from '../hooks/useHandleScoreLocalStorage'
 
 const Stack = createStackNavigator()
@@ -53,12 +53,12 @@ export function ContextMatchingGameProvider() {
             }}
             component={LoginRegisterScreen} />
           <Stack.Screen name='Game' component={GameScreen} />
-          <Stack.Screen options={{
+          {/* <Stack.Screen options={{
             headerShown: true,
             // headerLeft: () => (
             // )
           }}
-            name='Profile' component={OptionsScreen} />
+            name='Profile' component={OptionsScreen} /> */}
           {/* <Stack.Screen name='Animations'
             options={{
               transitionSpec: {
@@ -67,14 +67,14 @@ export function ContextMatchingGameProvider() {
               },
             }}
             component={Animations4} /> */}
-          {/* <Stack.Screen name='Menu' component={MenuScreen}
+          <Stack.Screen name='Menu' component={MenuScreen}
             options={{
               transitionSpec: {
                 open: config,
                 close: config,
               },
             }}
-          /> */}
+          />
           <Stack.Screen name='Scoreboard' component={ScoreboardScreen} />
           <Stack.Screen name='GameOver' component={GameOverScreen} />
         </Stack.Navigator>

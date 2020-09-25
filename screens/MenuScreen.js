@@ -17,6 +17,7 @@ const GameMenuScreen = ({ navigation, pairOfNumbers, score, savedData }) => {
   const iconRef = useRef(50)
   const [animationState, setAnimationState] = useState(19)
   const [animation, setanimation] = useState(false)
+  const startCountdown = useSelector(state => state.startCountdown)
 
   const handlerOnAnimationEnd = () => {
     if (animation === true) {
@@ -37,6 +38,7 @@ const GameMenuScreen = ({ navigation, pairOfNumbers, score, savedData }) => {
 
   return (
     <View style={{ height: "100%", flex: 1, position: 'absolute', zIndex: 20, backgroundColor: 'rgba(0,0,0,.4)' }}>
+
       <StartMenuViewAnimatable
         useNativeDriver
         animation={animation && zoomOut}

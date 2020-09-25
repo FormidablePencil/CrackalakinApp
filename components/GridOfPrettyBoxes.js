@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { View, LayoutAnimation } from 'react-native'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { matchingGameAction } from '../actionsTypes/actions'
@@ -9,14 +9,14 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { Dimensions } from 'react-native'
 import { VerticallyAlign } from '../styles/stylesMatchingGame'
 import * as Animatable from 'react-native-animatable';
+import Animated, { Easing } from 'react-native-reanimated';
 // import { ROUND_OVER } from '../actionsTypes/types';
 
-const AnimatedViewAnimated = Animatable.createAnimatableComponent(View);
 const windowHeight = Dimensions.get('window').height;
 
 const width = Math.round(Dimensions.get('window').width);
-const LinearGradientAnimatable = Animatable.createAnimatableComponent(LinearGradient);
-const TouchableWithoutFeedbackAnimatable = Animatable.createAnimatableComponent(TouchableWithoutFeedback);
+// const LinearGradientAnimatable = Animatable.createAnimatableComponent(LinearGradient);
+// const TouchableWithoutFeedbackAnimatable = Animatable.createAnimatableComponent(TouchableWithoutFeedback);
 
 export const GridOfPrettyBoxes = ({ pairOfNumbers }) => {
   const round = useSelector(state => state.round)
@@ -29,9 +29,9 @@ export const GridOfPrettyBoxes = ({ pairOfNumbers }) => {
   }, [round])
 
   return (
-    < VerticallyAlign style={{ height: width * 1.3333, width: '100%', }}
+    <VerticallyAlign style={{ height: width * 1.3333, width: '100%', }}
     >
-      <AnimatedViewAnimated
+      <Animatable.View
         style={{
           height: '100%',
           width: '100%', zIndex: 10,
@@ -57,7 +57,7 @@ export const GridOfPrettyBoxes = ({ pairOfNumbers }) => {
           item1={pairOfNumbers[10]} box1={10}
           item2={pairOfNumbers[11]} box2={11}
         />
-      </AnimatedViewAnimated>
+      </Animatable.View>
     </VerticallyAlign >
   )
 }
@@ -67,16 +67,16 @@ export const PrettyBoxesRow = ({ item, item1, item2, box, box1, box2 }) => {
 
   return (
     <HorizontalAlign style={{ width: '100%', height: '25%' }}>
-      <PrettyBoxes item={item} whatBox={box} />
-      <PrettyBoxes item={item1} whatBox={box1} />
-      <PrettyBoxes item={item2} whatBox={box2} />
+      <PrettyBox item={item} whatBox={box} />
+      <PrettyBox item={item1} whatBox={box1} />
+      <PrettyBox item={item2} whatBox={box2} />
     </HorizontalAlign >
   )
 }
 
 
 
-export const PrettyBoxes = ({ item, whatBox }, props) => { //show down here prettyBoxVisibility obj and matchingGameAction //~ the put to seperate file
+export const PrettyBox = ({ item, whatBox }, props) => { //show down here prettyBoxVisibility obj and matchingGameAction //~ the put to seperate file
   const prettyBoxProperties = useSelector(state => state.prettyBoxProperties)
   const tappedValue = useSelector(state => state.tappedValue)
   const pairOfNumbers = useSelector(state => state.pairOfNumbers)
@@ -85,21 +85,40 @@ export const PrettyBoxes = ({ item, whatBox }, props) => { //show down here pret
   const [cubeVisible, setCubeVisible] = useState(true)
   const colors = [prettyLinearGradient[item]['linearGradient'], prettyLinearGradient[item]['linearGradient1'], prettyLinearGradient[item]['linearGradient2']]
   const playGame = useSelector(state => state.playGame)
-  const [cubeOpacity, setCubeOpacity] = useState(1)
   const [runSecondAnimation, setRunSecondAnimation] = useState(false)
   const [nextRound, setNextRound] = useState(false)
   const [lastCube, setLastCube] = useState(false)
   //Math.floor(Math.random() * 800
   const round = useSelector(state => state.round)
   const fadeInAndOut = { 0: { opacity: 1 }, .5: { opacity: .0 }, 1: { opacity: 1 } }
+  const cubeOpacity = useRef(new Animated.Value(1)).current
 
   const fadeOut = { from: { opacity: 1, }, to: { opacity: .05 }, };
   const fadeIn = { from: { opacity: .3, }, to: { opacity: 1, }, };
 
+  useEffect(() => {
+    if (cubeVisible) executeCubeOpacityAnimation(0)
+  }, [cubeVisible])
+
+  useEffect(() => {
+    if (!cubeVisible) executeCubeOpacityAnimation(1)
+  }, [cubeVisible])
+
+  const executeCubeOpacityAnimation = (toValue) => {
+    setTimeout(() => {
+      Animated.timing(
+        cubeOpacity, {
+        toValue,
+        duration: 350,
+        easing: toValue ? Easing.linear : Easing.back(),
+      }
+      ).start();
+    }, toValue ? 0 : 300);
+  }
+
   const handleOnPress = async () => {
     if (cubesLeft !== 2) {
       dispatch(matchingGameAction({ value: item, whatBox, prettyBoxProperties, tappedValue, pairOfNumbers }))
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
     } else if (cubesLeft === 2) {
       if (lastCube === false) {
         setLastCube(true)
@@ -107,11 +126,9 @@ export const PrettyBoxes = ({ item, whatBox }, props) => { //show down here pret
         dispatch(matchingGameAction({ value: item, whatBox, prettyBoxProperties, tappedValue, pairOfNumbers }))
       } else {
         dispatch(matchingGameAction({ value: item, whatBox, prettyBoxProperties, tappedValue, pairOfNumbers }))
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
         setLastCube(false)
       }
     }
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
   }
 
   useEffect(() => {
@@ -134,33 +151,26 @@ export const PrettyBoxes = ({ item, whatBox }, props) => { //show down here pret
   }, [prettyBoxProperties[whatBox].visible])
 
   useEffect(() => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+    // LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
   }, [nextRound])
 
   return (
     <View style={{ width: '33.33%', height: '100%' }}>
-      <BoxShadowWorkAround>
-        <TouchableWithoutFeedbackAnimatable
-          useNativeDriver
-          animation={fadeIn}
-          style={{ height: '100%', backgroundColor: 'teal', borderRadius: 10 }}
-          onPress={() => handleOnPress()}>
-          {cubeVisible ?
-            <LinearGradientAnimatable
-              duration={200}
-              transition="opacity"
-              style={{ flex: 1, backgroundColor: 'purple', opacity: cubeOpacity, borderRadius: 10 }}
-              colors={colors}
-              start={[.6, .2]}
-              end={[.1, .7]} >
-              <StandardText>
-                {props.children}
-              </StandardText>
-            </LinearGradientAnimatable>
-            : null
-          }
-        </TouchableWithoutFeedbackAnimatable>
-      </BoxShadowWorkAround>
+      <TouchableWithoutFeedback
+        onPress={handleOnPress}>
+        <BoxShadowWorkAround>
+          <Animated.View
+            transition="opacity"
+            style={{ opacity: cubeOpacity, backgroundColor: 'teal', height: '100%', width: '100%', zIndex: 100, position: "absolute", borderRadius: 10, }} />
+          <LinearGradient
+            colors={colors}
+            start={[.6, .2]}
+            end={[.1, .7]}
+            style={{ borderRadius: 10, height: '100%', width: '100%', zIndex: 1 }}
+          >
+          </LinearGradient>
+        </BoxShadowWorkAround>
+      </TouchableWithoutFeedback>
     </View>
   )
 }

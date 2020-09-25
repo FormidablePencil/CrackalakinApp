@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react'
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 import { AlignContent, SettingsView, SettingsItemsText, StandardText, BottomRow, CountText, SettingsItems, StartingCountdownView } from '../styles/stylesMatchingGame'
 import GridOfPrettyBoxes from '../components/GridOfPrettyBoxes'
 import { MiscRow } from '../components/MiscRow'
@@ -14,7 +14,9 @@ export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGa
 
   useEffect(() => {
     if (cubesLeft === 0) {
-      dispatch({ type: ROUND_OVER })
+      setTimeout(() => {
+        dispatch({ type: ROUND_OVER })
+      }, 500);
     }
   }, [cubesLeft])
 
@@ -38,7 +40,8 @@ export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGa
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, position: 'relative' }}>
+
       {playGame === false &&
         <MenuScreen navigation={navigation} />
       }

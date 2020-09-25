@@ -9,7 +9,6 @@ function useHandleScoreLocalStorage() {
   const [firstLoaded, setFirstLoaded] = useState(false)
 
   useEffect(() => {/* //~ every game over save data locally */
-    console.log('game over')
     if (playGame || !firstLoaded) return
     asyncStorageMethods.validateAndUpdateData(
       { highscore: savedData.highscore, highestround: savedData.highestround },

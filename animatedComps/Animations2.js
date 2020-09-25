@@ -4,7 +4,7 @@ import Svg, { Circle, Rect } from 'react-native-svg';
 
 const Animations2 = () => {
    // const positionOfElement = useAnimation(1000)
-   const AnimatedSvg = Animated.createAnimatedComponent(Svg) // how you'd mak any element into an Animated one. Awesome!
+   // const AnimatedSvg = Animated.createAnimatedComponent(Svg) // how you'd mak any element into an Animated one. Awesome!
    const animation = useRef(new Animated.Value(0)).current;
    // const [animation] = useState(new Animated.Value(0))
 
@@ -21,7 +21,6 @@ const Animations2 = () => {
       }).start();
    };
 
-   console.log(animation)
    useEffect(() => {
    }, [animation])
 
@@ -37,17 +36,9 @@ const Animations2 = () => {
             <Circle cx="10" cy="10" r='5' />
             <Circle cx={positionOfElement * 100} cy="50" r='10' />
          </Svg> */}
-            <AnimatedSvg
+         {/* <AnimatedSvg
             style={{ top: animation }}
              height="50" width="50" viewBox="0 0 100 100">
-               {/* <Circle
-               cx="50"
-               cy="50"
-               r="45"
-               stroke="blue"
-               strokeWidth="2.5"
-               fill="green"
-            /> */}
                <Rect
                   x="20"
                   y='10' //~ lets try to move this downward
@@ -57,7 +48,7 @@ const Animations2 = () => {
                   strokeWidth="2"
                   fill="cyan"
                />
-            </AnimatedSvg>
+            </AnimatedSvg> */}
          <Button onPress={xIncrement} title='xIncrement' />
          <Button onPress={xDecrement} title='xDecrement' />
       </Animated.View>
