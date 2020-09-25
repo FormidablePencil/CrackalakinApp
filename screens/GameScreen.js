@@ -7,6 +7,7 @@ import { MatchingGameContext } from '../context/ContextMatchingGame'
 import { NEW_GAME, GAME_OVER, ROUND_OVER } from '../actionsTypes/types'
 import { connect, useDispatch } from 'react-redux'
 import MenuScreen from './MenuScreen'
+import { cacheDataToAsyncStorageObj as asyncStorageMethods } from '../hooks/cacheDataToAsyncStorageObj'
 
 export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGame, round, startCountdown, prettyBoxProperties }) => {
   const { setCurrentScreenOtherThanGame, toggleSettingsModal, setToggleSettingsModal } = useContext(MatchingGameContext)
@@ -38,7 +39,7 @@ export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGa
   }
 
   return (
-    <View style={{ flex: 1}}>
+    <View style={{ flex: 1 }}>
       {playGame === false &&
         <MenuScreen navigation={navigation} />
       }

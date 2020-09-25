@@ -1,19 +1,13 @@
 import React, { createContext, useState, useReducer } from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import GameScreen from '../screens/GameScreen'
-import MenuScreen from '../screens/MenuScreen'
 import { NavigationContainer } from '@react-navigation/native'
 import GameOverScreen from '../screens/GameOverScreen'
 import LoginRegisterScreen from '../screens/LoginRegisterScreen'
 import OptionsScreen from '../screens/OptionsScreen'
 import ScoreboardScreen from '../screens/ScoreboardScreen'
-import Animations from '../animatedComps/Animations'
-import Animations2 from '../animatedComps/Animations2'
-import Animations3 from '../animatedComps/Animations3'
-import Animations4 from '../animatedComps/Animations4'
-import { Button } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Text } from '../styles/globalStyles'
+import { useDispatch } from 'react-redux'
+import useHandleScoreLocalStorage from '../hooks/useHandleScoreLocalStorage'
 
 const Stack = createStackNavigator()
 
@@ -27,6 +21,9 @@ export function ContextMatchingGameProvider() {
   const [currentScreenOtherThanGame, setCurrentScreenOtherThanGame] = useState(false) //context
   const [toggleSettingsModal, setToggleSettingsModal] = useState(false) //context
   const [loginScreenReady, setLoginScreenReady] = useState(false)
+  const dispatch = useDispatch()
+
+  useHandleScoreLocalStorage()
 
   return (
     <NavigationContainer>
