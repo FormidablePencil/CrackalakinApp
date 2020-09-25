@@ -41,12 +41,7 @@ export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGa
   }
 
   return (
-<<<<<<< HEAD
     <View style={{ flex: 1 }}>
-=======
-    <View style={{ flex: 1, position: 'relative' }}>
-
->>>>>>> first-release-version
       {playGame === false &&
         <MenuScreen navigation={navigation} />
       }
