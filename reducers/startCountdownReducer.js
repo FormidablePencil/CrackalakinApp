@@ -8,8 +8,8 @@ export const startCountdownReducer = (state = initialState, action) => {
       return 3
     case DECREMENTING_COUNTDOWN:
       return state - 1
-      case TURN_OFF:
-        return -1
+    case TURN_OFF:
+      return -1
     default:
       return state
   }

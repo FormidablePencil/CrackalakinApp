@@ -25,6 +25,8 @@ export function ContextMatchingGameProvider() {
 
   useHandleScoreLocalStorage()
 
+  useHandleScoreLocalStorage()
+
   return (
     <NavigationContainer>
       <MatchingGameContext.Provider value={{
@@ -47,12 +49,12 @@ export function ContextMatchingGameProvider() {
             }}
             component={LoginRegisterScreen} />
           <Stack.Screen name='Game' component={GameScreen} />
-          <Stack.Screen options={{
+          {/* <Stack.Screen options={{
             headerShown: true,
             // headerLeft: () => (
             // )
           }}
-            name='Profile' component={OptionsScreen} />
+            name='Profile' component={OptionsScreen} /> */}
           {/* <Stack.Screen name='Animations'
             options={{
               transitionSpec: {
@@ -61,14 +63,14 @@ export function ContextMatchingGameProvider() {
               },
             }}
             component={Animations4} /> */}
-          {/* <Stack.Screen name='Menu' component={MenuScreen}
+          <Stack.Screen name='Menu' component={MenuScreen}
             options={{
               transitionSpec: {
                 open: config,
                 close: config,
               },
             }}
-          /> */}
+          />
           <Stack.Screen name='Scoreboard' component={ScoreboardScreen} />
           <Stack.Screen name='GameOver' component={GameOverScreen} />
         </Stack.Navigator>

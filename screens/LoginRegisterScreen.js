@@ -66,8 +66,8 @@ const LoginRegisterScreen = ({ navigation }) => {
           </>
         }
 
-      </View>
-    </LinearGradient>
+      </View >
+    </LinearGradient >
   );
 };
 

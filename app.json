@@ -3,7 +3,6 @@
     "name": "Crackalackin",
     "slug": "CrackinApp",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",
@@ -15,7 +14,11 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
+<<<<<<< HEAD
       "backgroundColor": "#FFCDA3"
+=======
+      "backgroundColor": "#FFE3C2"
+>>>>>>> first-release-version
     },
     "updates": {
       "fallbackToCacheTimeout": 0

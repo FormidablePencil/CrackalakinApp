@@ -10,9 +10,7 @@ const Timer = ({ navigation, playGame, seconds, score, round, startCountdown, sa
   const { currentScreenOtherThanGame, setCurrentScreenOtherThanGame, toggleSettingsModal, setToggleSettingsModal } = useContext(MatchingGameContext) //reason why there's no ability to have a seperate file for actions with useContext is cause it's not meant as a replacement for Redux and heavy use with these method of storing take a hit on the proformance
   const dispatch = useDispatch()
 
-  dispatch({ type: TURN_OFF })
-
-  //COUNTDOWN LOGIC
+  // 3 sec COUNTDOWN LOGIC
   useEffect(() => {
     let interval = null
     if (playGame && currentScreenOtherThanGame === false) {

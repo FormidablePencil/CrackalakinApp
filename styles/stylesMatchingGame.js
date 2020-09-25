@@ -69,6 +69,7 @@ export const RandomizeBtn = styled.TouchableOpacity`
   background-color: gray; 
 `
 export const BoxShadowWorkAround = styled.View`
+  position: relative;
   elevation: 5;
   background-color: ${props => props.theme[props.theme.current].bg.bgColor}; 
   margin: 6px; /* //~ what controls the margin between the screen */
