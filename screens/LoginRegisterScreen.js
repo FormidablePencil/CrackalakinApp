@@ -42,7 +42,7 @@ const LoginRegisterScreen = ({ navigation }) => {
             >What's</H1>
             <H1
               style={{ position: 'absolute', top: 150 }}
-            >Crackalackin</H1>
+            >Crackalackin?</H1>
             <View style={{ marginTop: 200 }}>
               <PlayBtn
                 onPress={() => {
