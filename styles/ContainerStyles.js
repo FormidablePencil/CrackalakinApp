@@ -6,9 +6,9 @@ export const AlignTotallyCenterView = styled.View`
   align-items: center;
 `
 export const ItemInCol = styled.View`
-  flex-direction: row; justify-content: space-evenly; width: 100%;
+  margin-top: 50px; flex-direction: row; justify-content: space-evenly; width: 100%;
  `;
- export const ItemInColOptions = styled.View`
+export const ItemInColOptions = styled.View`
     background-color: rgb(23, 22, 21); width: 100%; 
  `;
 export const JustifyCenterView = styled.View`

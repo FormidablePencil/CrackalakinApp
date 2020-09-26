@@ -22,7 +22,7 @@ const EnteringOptionsComp = ({ navigation, setLoginScreenReady }) => {
   }
 
   const onPressHandlerRunLayoutAnimation = (whatClickedOn) => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setWhatInputsToRender(whatClickedOn)
     if (whatClickedOn === 'login') setCurrentInputSchema(loginInputSchema)
     else if (whatClickedOn === 'register') setCurrentInputSchema(registerInputSchema)
@@ -30,7 +30,7 @@ const EnteringOptionsComp = ({ navigation, setLoginScreenReady }) => {
 
   const onPressHandlerGoBack = () => {
     setFormInputs(loginInputSchema)
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setWhatInputsToRender()
   }
 

@@ -28,7 +28,7 @@ export const ContinueBtn = styled.TouchableOpacity`
   justify-content: center;
 `;
 export const ActionBtn = styled.TouchableOpacity`
-  background-color: #FFBE3C;
+  background-color: #5EE9CC;
   border-radius: 10px;
   width: 130px;
   height: 130px;

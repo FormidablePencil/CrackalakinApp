@@ -6,17 +6,16 @@ import { Ionicons } from '@expo/vector-icons';
 import { Text } from '../styles/TextStyles';
 import { useSelector } from 'react-redux';
 
-export const MiscRow = ({ navigation, setToggleSettingsModal }) => {
-  
+export const MiscRow = ({ hideSettingsIcon, navigation, setToggleSettingsModal }) => {
   return (
-    <Row style={{ position: 'absolute', top: 40 }}>
-      <Timer navigation={navigation} />
-      <Ionicons name="md-settings" size={50} onPress={() => setToggleSettingsModal(true)} color="white" style={{ bottom: 10 }} />
+    <Row style={{ position: 'absolute', top: 40, zIndex: 50 }}>
+      <Timer navigation={navigation} setToggleSettingsModal={setToggleSettingsModal} />
+      {hideSettingsIcon &&
+        <SettingsBtn setToggleSettingsModal={setToggleSettingsModal} />
+      }
     </Row>
   )
 }
 
-      // <SettingsView>
-      //   <StandardText>Restart</StandardText>
-      //   <StandardText>Quit</StandardText>
-      // </SettingsView>
+export const SettingsBtn = ({ setToggleSettingsModal }) =>
+  <Ionicons name="md-settings" size={50} onPress={() => setToggleSettingsModal(true)} color="white" style={{ bottom: 10 }} />

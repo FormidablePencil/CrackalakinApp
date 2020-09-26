@@ -6,7 +6,7 @@ import { ContextMatchingGameProvider } from './context/ContextMatchingGame';
 import { Provider } from 'react-redux';
 import configureStore from './store';
 const store = configureStore()
-// import { setCustomText } from 'react-native-global-props';
+import { StatusBar } from 'expo-status-bar';
 
 export const authentication = false
 
@@ -41,6 +41,7 @@ export const App = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
+        <StatusBar style="light" />
         {fontLoaded ?
           <ContextMatchingGameProvider />
           : null

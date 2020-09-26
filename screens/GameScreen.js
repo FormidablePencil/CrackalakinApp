@@ -1,8 +1,8 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { Text, View } from 'react-native'
 import { AlignContent, SettingsView, SettingsItemsText, StandardText, BottomRow, CountText, SettingsItems, StartingCountdownView } from '../styles/stylesMatchingGame'
 import GridOfPrettyBoxes from '../components/GridOfPrettyBoxes'
-import { MiscRow } from '../components/MiscRow'
+import { MiscRow, SettingsBtn } from '../components/MiscRow'
 import { MatchingGameContext } from '../context/ContextMatchingGame'
 import { NEW_GAME, GAME_OVER, ROUND_OVER } from '../actionsTypes/types'
 import { connect, useDispatch } from 'react-redux'
@@ -11,6 +11,7 @@ import { cacheDataToAsyncStorageObj as asyncStorageMethods } from '../hooks/cach
 
 export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGame, round, startCountdown, prettyBoxProperties }) => {
   const { setCurrentScreenOtherThanGame, toggleSettingsModal, setToggleSettingsModal } = useContext(MatchingGameContext)
+  const [hideSettingsIcon, setHideSettingsIcon] = useState(false)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -27,6 +28,12 @@ export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGa
     }
   }, [playGame])
 
+  useEffect(() => {
+    if (toggleSettingsModal) return setHideSettingsIcon(false)
+    if (startCountdown >= 1) setHideSettingsIcon(true)
+    if (startCountdown === 0) setHideSettingsIcon(true)
+  }, [startCountdown, toggleSettingsModal])
+
   const handlerOnPressRestart = () => {
     dispatch({ type: NEW_GAME })
     setToggleSettingsModal(false)
@@ -34,7 +41,7 @@ export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGa
 
   const handleOnPressQuit = () => {
     navigation.navigate('Game')
-    dispatch({ type: NEW_GAME })
+    // await dispatch({ type: NEW_GAME })
     dispatch({ type: GAME_OVER })
     setCurrentScreenOtherThanGame(true)
     setToggleSettingsModal(false)
@@ -47,7 +54,10 @@ export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGa
       }
       <AlignContent>
         {playGame &&
-          <MiscRow navigation={navigation} setToggleSettingsModal={setToggleSettingsModal} />
+          <MiscRow
+            hideSettingsIcon={hideSettingsIcon}
+            navigation={navigation}
+            setToggleSettingsModal={setToggleSettingsModal} />
         }
         <GridOfPrettyBoxes pairOfNumbers={pairOfNumbers} />
         {playGame &&
@@ -60,8 +70,15 @@ export const GameScreen = ({ navigation, pairOfNumbers, cubesLeft, score, playGa
           </BottomRow>
         }
       </AlignContent>
-      {startCountdown >= 0 && playGame ?
-        <StartingCountdownView><StandardText>{startCountdown}</StandardText></StartingCountdownView>
+      {startCountdown >= 1 && playGame ?
+        <StartingCountdownView>
+          {hideSettingsIcon &&
+            <View style={{ position: "absolute", top: 65, right: 20 }}>
+              <SettingsBtn setToggleSettingsModal={setToggleSettingsModal} />
+            </View>
+          }
+          <StandardText style={{fontSize: 60}}>{startCountdown}</StandardText>
+        </StartingCountdownView>
         : null
       }
       {toggleSettingsModal ?

@@ -8,6 +8,7 @@ import OptionsScreen from '../screens/OptionsScreen'
 import ScoreboardScreen from '../screens/ScoreboardScreen'
 import { useDispatch } from 'react-redux'
 import useHandleScoreLocalStorage from '../hooks/useHandleScoreLocalStorage'
+import MenuScreen from '../screens/MenuScreen'
 
 const Stack = createStackNavigator()
 
@@ -22,8 +23,6 @@ export function ContextMatchingGameProvider() {
   const [toggleSettingsModal, setToggleSettingsModal] = useState(false) //context
   const [loginScreenReady, setLoginScreenReady] = useState(false)
   const dispatch = useDispatch()
-
-  useHandleScoreLocalStorage()
 
   useHandleScoreLocalStorage()
 

@@ -1,5 +1,8 @@
 {
   "expo": {
+    "androidStatusBar": {
+      "translucent": true
+    },
     "name": "Crackalackin",
     "slug": "CrackinApp",
     "privacy": "public",

@@ -29,7 +29,7 @@ export const GridOfPrettyBoxes = ({ pairOfNumbers }) => {
   }, [round])
 
   return (
-    <VerticallyAlign style={{ height: width * 1.3333, width: '100%', }}
+    <VerticallyAlign style={{ height: width * 1.3333, width: '100%' }}
     >
       <Animatable.View
         style={{
@@ -133,7 +133,7 @@ export const PrettyBox = ({ item, whatBox }, props) => { //show down here pretty
 
   useEffect(() => {
     if (prettyBoxProperties.filter(item => item.visible === false)[0] === undefined) {
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+      // LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
       // await setCubeVisible(false)
       setCubeVisible(true)
     }
@@ -146,7 +146,7 @@ export const PrettyBox = ({ item, whatBox }, props) => { //show down here pretty
   useEffect(() => {
     if (!prettyBoxProperties[whatBox].visible) {
       setCubeVisible(false)
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+      // LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
     }
   }, [prettyBoxProperties[whatBox].visible])
 

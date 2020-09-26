@@ -6,7 +6,7 @@ export const H1 = styled.Text`
   font-size: 40px;
 `;
 export const Text = styled.Text`
-  font-family: 'Biryani-Regular';
+  font-family: 'Bungee-Regular';
   font-size: 20px;
   color: white;
  `

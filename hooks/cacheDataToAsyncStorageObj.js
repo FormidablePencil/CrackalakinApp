@@ -2,6 +2,7 @@ import { AsyncStorage } from "react-native"
 
 export const cacheDataToAsyncStorageObj = {
   getLocallyStoredData: async (getFrom) => {
+    const localStorageString = await AsyncStorage.getItem(getFrom)
     const result = await JSON.parse(localStorageString)
     return result
   },
@@ -14,7 +15,7 @@ export const cacheDataToAsyncStorageObj = {
       console.warn(err)
     }
   },
-
+  
   validateAndUpdateData: async (data, dirName) => {
     const localStorageResponse = await cacheDataToAsyncStorageObj.getLocallyStoredData(dirName)
     if (localStorageResponse === null || data !== localStorageResponse) {

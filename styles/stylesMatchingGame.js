@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { StyleSheet } from 'react-native'
-import { theme } from './globalStyles';
 
 export const prettyLinearGradient = {   /* //~ now to make it look nice with linear gradient */
   0: {
@@ -54,11 +53,11 @@ export const SettingsItems = styled.TouchableOpacity`
   padding: 10px;
 `
 export const AlignContent = styled.View`
-  z-index: 0;
   flex: 1;
   background-color: ${props => props.theme[props.theme.current].bg.bgColor};
   justify-content: center;
   align-items: center;
+  height: 100%;
 `
 export const RandomizeBtn = styled.TouchableOpacity`
   height: 80px;
@@ -90,8 +89,8 @@ export const StartMenuView = styled.View`
   width: 100%;
   justify-content: space-around;
   align-items: center;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 30px;
+  padding-bottom: 20px;
   z-index: 40;
   height: 100%;
 `
@@ -114,6 +113,7 @@ export const BottomRow = styled.View`
   padding: 0px 20px 0px 20px;
 `
 export const SettingsView = styled.View`
+  z-index: 60;
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -127,13 +127,13 @@ export const Round = styled.View`
   background-color: blue;
 `
 export const StartingCountdownView = styled.View`
+  z-index: 40;
   flex: 1;
   position: absolute;
   width: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
-  z-index: 1;
   background-color: rgba(1,1,1,.3);
 `
 

@@ -16,7 +16,7 @@ const Animation4 = ({navigation}) => {
     <View style={style.container}>
       <TouchableOpacity
         onPress={() => {
-          LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+          // LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
           setExpanded(!expanded);
         }}
       >

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { LayoutAnimation, TouchableOpacity, View } from 'react-native';
 import { TOGGLE, COUNTING_DOWN_SECONDS, ROUND_OVER, GAME_OVER, TURN_OFF, DECREMENTING_COUNTDOWN } from '../actionsTypes/types';
 import { MatchingGameContext } from '../context/ContextMatchingGame'
 import { CountdownText } from '../styles/stylesMatchingGame'
@@ -10,16 +10,16 @@ const Timer = ({ navigation, playGame, seconds, score, round, startCountdown, sa
   const { currentScreenOtherThanGame, setCurrentScreenOtherThanGame, toggleSettingsModal, setToggleSettingsModal } = useContext(MatchingGameContext) //reason why there's no ability to have a seperate file for actions with useContext is cause it's not meant as a replacement for Redux and heavy use with these method of storing take a hit on the proformance
   const dispatch = useDispatch()
 
-  // 3 sec COUNTDOWN LOGIC
+  // 3 SECOND COUNTDOWN LOGIC
   useEffect(() => {
     let interval = null
-    if (playGame && currentScreenOtherThanGame === false) {
-      if (startCountdown >= 0) {
+    if (playGame) {
+      if (startCountdown >= 1) {
         interval = setInterval(() => {
           dispatch({ type: DECREMENTING_COUNTDOWN })
         }, 1000)
       }
-    } else if (!playGame && currentScreenOtherThanGame === false) {
+    } else if (!playGame) {
       clearInterval(interval)
       navigation.navigate('GameOver')
     } else {
@@ -31,7 +31,7 @@ const Timer = ({ navigation, playGame, seconds, score, round, startCountdown, sa
   //TIMER LOGIC
   useEffect(() => { //~ onto implementing the soconds countdown (we really need to rename these things)
     let interval = null;
-    if (playGame && startCountdown < 0) {
+    if (playGame && startCountdown < 1) {
       if (seconds > 0 && playGame === true) {
         interval = setInterval(() => {
           // setSeconds(seconds => seconds - 1);
@@ -41,6 +41,7 @@ const Timer = ({ navigation, playGame, seconds, score, round, startCountdown, sa
         clearInterval(interval);
         // setPlayGame(false)
         navigation.navigate('GameOver')
+        dispatch({ type: GAME_OVER })
       }
     }
     return () => clearInterval(interval);
