@@ -31,7 +31,7 @@
     "description": "",
     "android": {
       "package": "com.formidablepencil.crackilackin",
-      "versionCode": 1
+      "versionCode": 2
     }
   }
 }
